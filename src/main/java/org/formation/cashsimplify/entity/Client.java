@@ -1,13 +1,16 @@
 package org.formation.cashsimplify.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.formation.cashsimplify.entity.Compte;
+
 
 @Data   // Lombok: génère getters/setters/toString/hashCode
 @Entity // JPA: table en base
@@ -35,6 +38,10 @@ public class Client {
 
     @Size(max = 20, message = "Téléphone trop long")
     private String telephone;
+    @OneToMany(mappedBy = "client")
+    private List<Compte> comptes = new ArrayList<>();
+    @ManyToOne
+    private Conseiller conseiller;
 
     // Constructeur to creat a client easily
     public Client(String nom, String prenom) {

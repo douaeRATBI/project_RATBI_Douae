@@ -14,10 +14,14 @@ public interface ClientMapper {
     ClientDto toDto(Client client);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "comptes", ignore = true)
+    @Mapping(target = "conseiller", ignore = true)   // 👈 IMPORTANT
     Client toEntity(ClientCreateDto dto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "comptes", ignore = true)
+    @Mapping(target = "conseiller", ignore = true)   // 👈 IMPORTANT
     void updateEntity(@MappingTarget Client client, ClientUpdateDto dto);
 
     List<ClientDto> toDtoList(List<Client> clients);
