@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Appender console standard -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender dédié pour les virements -->
+    <appender name="VIREMENT_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/virement.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/virement-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%date [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- LOGGER dédié aux virements (utilisé par ton Aspect) -->
+    <logger name="VIREMENT_LOGGER" level="INFO" additivity="false">
+        <appender-ref ref="VIREMENT_FILE" />
+    </logger>
+
+    <!-- Root logger pour tout le reste (Hibernate, Spring, etc.) -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>

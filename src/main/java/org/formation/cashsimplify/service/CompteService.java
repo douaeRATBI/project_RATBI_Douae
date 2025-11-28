@@ -10,5 +10,4 @@ public interface CompteService {
     List<Compte> findAll();
     Optional<Compte> findById(Long id);
     Compte save(Compte compte);
-    void effectuerVirement(Long idSource, Long idDestination, BigDecimal montant);
-}
+    void effectuerVirement(Long idSource, Long idDestination, BigDecimal montant);}
